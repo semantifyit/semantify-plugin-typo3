@@ -27,6 +27,7 @@ $EM_CONF[$_EXTKEY] = array(
             'typo3' => '6.2.0-8.5.99',
         ),
         'conflicts' => array(
+            'mayrhofen_annotator' => '0.1.0-9.9.9'
         ),
         'suggests' => array(
         ),
