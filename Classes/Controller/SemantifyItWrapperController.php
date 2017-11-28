@@ -151,6 +151,8 @@ class SemantifyItWrapperController extends ActionController
         }
         $annotationListFromAPI = json_decode($json);
 
+        $annotationListFromAPI = $annotationListFromAPI->data;
+
         //echo is_array($annotationListFromAPI);
         //var_dump($annotationListFromAPI);
 
