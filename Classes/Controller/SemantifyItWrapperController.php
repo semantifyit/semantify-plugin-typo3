@@ -67,7 +67,7 @@ class SemantifyItWrapperController extends ActionController
      */
     private function displayMessage($message, $type)
     {
-        //echo "<br/><br/><div style='position:absolute;top:65px; margin:24px;padding: 5px;'>" . $message . "</div>";
+        echo "<br/><br/><div style='position:absolute;top:65px; margin:24px;padding: 5px;'>" . $message . "</div>";
         switch ($type) {
 
             case "warning":
@@ -81,13 +81,14 @@ class SemantifyItWrapperController extends ActionController
                 break;
 
         }
-
+        /*
         $mes = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Messaging\FlashMessage::class,
             $message,
             $header, // [optional] the header
             $t3type, // [optional] the severity defaults to \TYPO3\CMS\Core\Messaging\FlashMessage::OK
             true // [optional] whether the message should be stored in the session or only in the \TYPO3\CMS\Core\Messaging\FlashMessageQueue object (default is false)
         );
+        */
 
     }
 
@@ -157,7 +158,7 @@ class SemantifyItWrapperController extends ActionController
         //var_dump($annotationListFromAPI);
 
         //if there is no error
-        if (($annotationListFromAPI->error == "") && ($json != false)) {
+        if (($annotationListFromAPI->error == "") && ($json != false) && ($annotationListFromAPI!=null)) {
             //var_dump($annotationListFromAPI);
 
             $last = "";
