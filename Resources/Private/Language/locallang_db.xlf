@@ -49,6 +49,9 @@
             <trans-unit id="configuration.description">
                   <source>Website API key: Please input your Website API key to start using semantify.it on your webpage. If you don't have a API key please visit https://www.semantify.it</source>
             </trans-unit>
+            <trans-unit id="configuration.secret">
+                  <source>Website Secret key: Please input your Website Secret key.</source>
+            </trans-unit>
             <trans-unit id="configuration.annotationByURL">
                   <source>Automatic Annotation search by URL: Please check this checkbox if you want to have dynamic search for your annotation on semantify.it by the url</source>
             </trans-unit>
