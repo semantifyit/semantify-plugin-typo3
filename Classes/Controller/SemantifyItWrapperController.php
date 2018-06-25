@@ -213,7 +213,11 @@ class SemantifyItWrapperController extends ActionController
      * @return mixed
      */
     public function updateAnnotation($annotation, $uid){
-        $response =  $this->model->updateAnnotation($annotation, $uid);
+        /**
+            This package is need to be able post an annotation
+         */
+        $package = "[{\"content\":".$annotation."}]";
+        $response =  $this->model->updateAnnotation($package, $uid);
         $id = $this->extractID($response);
         return $id;
     }
@@ -225,7 +229,13 @@ class SemantifyItWrapperController extends ActionController
      * @return mixed
      */
     public function postAnnotation($annotation){
-        $response =  $this->model->postAnnotation($annotation);
+        //echo($annotation);
+        /**
+        This package is need to be able post an annotation
+         */
+        $package = "[{\"content\":".$annotation."}]";
+        $response =  $this->model->postAnnotation($package);
+        //var_dump($response);
         $id = $this->extractID($response);
         return $id;
     }
@@ -236,6 +246,11 @@ class SemantifyItWrapperController extends ActionController
      */
     private function extractID($response){
         $fields = json_decode($response);
+
+        if(isset($fields[0])){
+            $fields = $fields[0];
+        }
+
         if(!isset($fields->UID)){
             return false;
         }
