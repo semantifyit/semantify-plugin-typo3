@@ -61,9 +61,11 @@ class ProcessCmdmap
             //var_dump($newID);
             //if it is a new annotation
             if (($annotationID == "1") && (($newID == "") || ($newID == "0"))) {
+                //var_dump($newAnnotation);
+
                 //echo "Post new Annotation";
                 $uid = $semantify->postAnnotation($newAnnotation);
-                //echo $uid;
+                //echo "UID ".$uid;
                 $fieldArray["semantify_it_annotationNew_ID"] = $uid;
                 $fieldArray["semantify_it_annotationID"] = $uid;
                 $pObj->datamap[$table][$id]["semantify_it_annotationNew_ID"] = $uid;
