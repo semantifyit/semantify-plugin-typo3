@@ -64,23 +64,35 @@ class ProcessCmdmap
                 //var_dump($newAnnotation);
 
                 //echo "Post new Annotation";
-                $uid = $semantify->postAnnotation($newAnnotation);
-                //echo "UID ".$uid;
-                $fieldArray["semantify_it_annotationNew_ID"] = $uid;
-                $fieldArray["semantify_it_annotationID"] = $uid;
-                $pObj->datamap[$table][$id]["semantify_it_annotationNew_ID"] = $uid;
+                $IDs = $semantify->postAnnotation($newAnnotation);
+
+                //var_dump($IDs);
+
+                $fieldArray["semantify_it_annotationNew_ID"] = $IDs["UID"];
+                $fieldArray["semantify_it_annotationNew_SemantifyID"] = $IDs["id"];
+                $fieldArray["semantify_it_annotationID"] = $IDs["UID"];
+
+                $pObj->datamap[$table][$id]["semantify_it_annotationNew_ID"] = $IDs["UID"];
+                $pObj->datamap[$table][$id]["semantify_it_annotationNew_SemantifyID"] = $IDs["id"];
 
             } //check if there is a new annotation id and it is a same as current annotation choosen one
             elseif ((isset($newID)) && ($newID != "") && ($newID != "0")) {
 
-               //echo "Updating Annotation with id: " . $newID;
-                $uid = $semantify->updateAnnotation($newAnnotation, $newID);
+                //echo "Updating Annotation with UID: " . $newID;
 
-                //echo "#" . $uid;
+                $IDs = $semantify->updateAnnotation($newAnnotation, $newID);
 
-                $fieldArray["semantify_it_annotationNew_ID"] = $uid;
-                $fieldArray["semantify_it_annotationID"] = $uid;
-                $pObj->datamap[$table][$id]["semantify_it_annotationNew_ID"] = $uid;
+                //var_dump($IDs);
+
+                if(is_array($IDs)){
+                    $fieldArray["semantify_it_annotationNew_ID"] = $IDs["UID"];
+                    $fieldArray["semantify_it_annotationNew_SemantifyID"] = $IDs["id"];
+                    $fieldArray["semantify_it_annotationID"] = $IDs["UID"];
+
+                    $pObj->datamap[$table][$id]["semantify_it_annotationNew_ID"] = $IDs["UID"];
+                    $pObj->datamap[$table][$id]["semantify_it_annotationNew_SemantifyID"] = $IDs["id"];
+                }
+
             } else {
 
                 //echo 'nothing choosed';
