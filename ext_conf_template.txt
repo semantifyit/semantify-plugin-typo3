@@ -1,5 +1,7 @@
 # cat=configuration; type=string; lenght=7; label=LLL:EXT:semantify_it/Resources/Private/Language/locallang_db.xlf:configuration.description
 smtf.WebsiteApiKey =
+# cat=configuration; type=string; lenght=32; label=LLL:EXT:semantify_it/Resources/Private/Language/locallang_db.xlf:configuration.secret
+smtf.WebsiteApiSecret =
 # cat=configuration; type=boolean; label=LLL:EXT:semantify_it/Resources/Private/Language/locallang_db.xlf:configuration.annotationByURL
 smtf.annotationByURL = 0
 
