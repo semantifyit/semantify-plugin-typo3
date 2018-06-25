@@ -128,6 +128,17 @@ class SemantifyItWrapperController extends ActionController
      */
     public function getAnnotationList()
     {
+
+        if(!$this->checkCredentials("api")){
+            $annotationList[] = array(
+                "LLL:EXT:semantify_it/Resources/Private/Language/locallang_db.xlf:pages.semantify_it_NoAPI",
+                ""
+            );
+
+            return $annotationList;
+        }
+
+
         $annotationList[] = array(
             "LLL:EXT:semantify_it/Resources/Private/Language/locallang_db.xlf:pages.semantify_it_annotationList",
             ""
@@ -137,10 +148,20 @@ class SemantifyItWrapperController extends ActionController
             "0"
         );
 
-        $annotationList[] = array(
-            "LLL:EXT:semantify_it/Resources/Private/Language/locallang_db.xlf:pages.semantify_it_annotationListNew",
-            "1"
-        );
+
+        if($this->checkCredentials("secret")){
+
+            $annotationList[] = array(
+                "LLL:EXT:semantify_it/Resources/Private/Language/locallang_db.xlf:pages.semantify_it_annotationListNew",
+                "1"
+            );
+
+        }else{
+            $annotationList[] = array(
+                "LLL:EXT:semantify_it/Resources/Private/Language/locallang_db.xlf:pages.semantify_it_NoSecret",
+                ""
+            );
+        }
 
         $json = $this->model->getAnnotationList();
 
@@ -212,14 +233,17 @@ class SemantifyItWrapperController extends ActionController
      * @param $uid
      * @return mixed
      */
-    public function updateAnnotation($annotation, $uid){
+    public function updateAnnotation($annotation, $UID){
         /**
             This package is need to be able post an annotation
          */
-        $package = "[{\"content\":".$annotation."}]";
-        $response =  $this->model->updateAnnotation($package, $uid);
-        $id = $this->extractID($response);
-        return $id;
+        $package = "{\"content\":".$annotation."}";
+        $response =  $this->model->updateAnnotation($package, $UID);
+
+        //var_dump($response);
+
+        $IDs = $this->extractIDs($response);
+        return $IDs;
     }
 
     /**
@@ -236,8 +260,8 @@ class SemantifyItWrapperController extends ActionController
         $package = "[{\"content\":".$annotation."}]";
         $response =  $this->model->postAnnotation($package);
         //var_dump($response);
-        $id = $this->extractID($response);
-        return $id;
+        $IDs = $this->extractIDs($response);
+        return $IDs;
     }
 
     /**
@@ -247,14 +271,41 @@ class SemantifyItWrapperController extends ActionController
     private function extractID($response){
         $fields = json_decode($response);
 
-        if(isset($fields[0])){
-            $fields = $fields[0];
+        if(is_array($fields)){
+            if(isset($fields[0])){
+                $fields = $fields[0];
+            }
         }
 
         if(!isset($fields->UID)){
             return false;
         }
         return $fields->UID;
+    }
+
+    /**
+     * @param $response
+     * @return mixed
+     */
+    private function extractIDs($response){
+        $fields = json_decode($response);
+
+
+        if(is_array($fields)){
+            if(isset($fields[0])){
+                $fields = $fields[0];
+            }
+        }
+
+        if(!isset($fields->UID)){
+            return false;
+        }
+
+        if(!isset($fields->id)){
+            return false;
+        }
+
+        return array("UID" => $fields->UID, "id" => $fields->id);
     }
 
 
@@ -273,6 +324,30 @@ class SemantifyItWrapperController extends ActionController
         $jsonld = $this->constructAnnotation($data);
         //$this->deinitialize();
         return $jsonld;
+    }
+
+
+    public function checkCredentials($what){
+
+        $confArray = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['semantify_it']);
+        $websiteApiKey = $confArray['smtf.']['WebsiteApiKey'];
+        $websiteApiSecret = $confArray['smtf.']['WebsiteApiSecret'];
+
+        $check = "";
+
+        if($what=="secret"){
+            $check = $websiteApiSecret;
+        }
+
+        if($what=="api"){
+            $check = $websiteApiKey;
+        }
+
+        if($check!=""){
+            return true;
+        }else{
+            return false;
+        }
     }
 
 
