@@ -3,6 +3,7 @@ if (!defined ('TYPO3_MODE')) die ('Access denied.');
 
 $TYPO3_CONF_VARS['FE']['pageOverlayFields'] .= ',semantify_it_annotationID';
 $TYPO3_CONF_VARS['FE']['pageOverlayFields'] .= ',semantify_it_annotationNew_ID';
+$TYPO3_CONF_VARS['FE']['pageOverlayFields'] .= ',semantify_it_annotationNew_SemantifyID';
 $TYPO3_CONF_VARS['FE']['pageOverlayFields'] .= ',semantify_it_annotationNew_StepOne';
 $TYPO3_CONF_VARS['FE']['pageOverlayFields'] .= ',semantify_it_annotationNew_StepTwo';
 $TYPO3_CONF_VARS['FE']['pageOverlayFields'] .= ',semantify_it_annotationNew_Name';

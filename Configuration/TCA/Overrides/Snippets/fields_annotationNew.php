@@ -1,5 +1,6 @@
 <?php
 $ids[] = 'semantify_it_annotationNew_ID';
+$ids[] = 'semantify_it_annotationNew_SemantifyID';
 $ids[] = 'semantify_it_annotationNew_StepOne';
 $ids[] = 'semantify_it_annotationNew_StepTwo';
 $ids[] = 'semantify_it_annotationNew_URL';
@@ -14,6 +15,22 @@ $fields[] = array(
             'AND' => array(
                 'FIELD:semantify_it_annotationID:=:1',
                 'FIELD:semantify_it_annotationNew_ID:!=:',
+            ),
+        ),
+        'config'    => array(
+            'type' => 'none'
+        )
+    ),
+);
+
+$fields[] = array(
+    'semantify_it_annotationNew_SemantifyID' => array(
+        'label' => "LLL:EXT:semantify_it/Resources/Private/Language/locallang_db.xlf:pages.semantify_it_annotationNew_SemantifyID",
+        'exclude'   => 1,
+        'displayCond' => array(
+            'AND' => array(
+                'FIELD:semantify_it_annotationID:=:1',
+                'FIELD:semantify_it_annotationNew_SemantifyID:!=:',
             ),
         ),
         'config'    => array(
