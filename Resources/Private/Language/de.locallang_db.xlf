@@ -16,6 +16,10 @@
                 <source>UID of the annotation which was created for this page</source>
                 <target>Annotation UID die Webseite gemacht habe</target>
             </trans-unit>
+            <trans-unit id="pages.semantify_it_annotationNew_SemantifyID">
+                <source>Internal Semantify id of the annotation which was created for this page</source>
+                <target>Internal Semantify id die Webseite gemacht habe</target>
+            </trans-unit>
             <trans-unit id="pages.semantify_it_annotationList">
                  <source>Choose your annotation</source>
                  <target>Wählen Sie eine Annotation aus</target>
@@ -25,7 +29,7 @@
                  <target>Keine Annotation</target>
             </trans-unit>
             <trans-unit id="pages.semantify_it_annotationListNew">
-                  <source>Make a or edit new annotation</source>
+                  <source>Make or edit an annotation</source>
                   <target>Mach oder änder eine neue Annotation</target>
             </trans-unit>
             <trans-unit id="pages.semantify_it_annotationNew_StepOne">
@@ -79,6 +83,14 @@
             <trans-unit id="mlang_labels_tabdescr">
                 <source>Deploy your annotations to your website</source>
                 <target>Deploy your annotations to your website</target>
+            </trans-unit>
+            <trans-unit id="pages.semantify_it_NoAPI">
+                <source>Please add Semantify API and Secret key</source>
+                <target>Please add Semantify API and Secret key</target>
+            </trans-unit>
+            <trans-unit id="pages.semantify_it_NoSecret">
+                <source>For creating new annotations please add Semantify Secret key</source>
+                <target>For creating new annotations please add Semantify Secret key</target>
             </trans-unit>
         </body>
     </file>
